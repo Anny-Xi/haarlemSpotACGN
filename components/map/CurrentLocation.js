@@ -3,7 +3,30 @@ import { Platform, Text, View, StyleSheet } from 'react-native';
 
 import * as Location from 'expo-location';
 
+
+const url = "https://github.com/Anny-Xi/haarlemSpotACGN/blob/master/locations.json";
+
+async function loadLocationMarkerData() {
+
+    try {
+        const result = await fetch(url);
+        const data = await result.json();
+        return data;
+
+    } catch (e) {
+        console.log('error', e);
+    }
+}
+
+async function loadMarkers() {
+
+
+    let data = await loadLocationMarkerData(); // await makes sure that the function will finish
+    console.log(data);
+}
+
 export default function CurrentLocation() {
+  loadMarkers();
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
 
