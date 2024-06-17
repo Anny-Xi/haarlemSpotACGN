@@ -1,9 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StyleSheet, Text, View } from 'react-native';
-import HomeScreen from './components/map/HomeScreen';
-import CurrentLocation from './components/map/CurrentLocation';
-import SettingScreen from './components/setting/ThemeContext';
+import HomeScreen from './app/screens/HomeScreen';
+import CurrentLocation from './app/screens/MapScreen';
+import SettingScreen from './app/setting/ThemeContext';
 
 const Stack = createNativeStackNavigator();
 

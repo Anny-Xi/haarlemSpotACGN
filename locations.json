@@ -3,6 +3,7 @@
       {
         "id": 1,
         "name": "Jopo de Pojo",
+        "info" : "Grootste strip aanbod van noord-holland.",
         "coordinates": {
           "latitude": 52.379300,
           "longitude": 4.636780
@@ -11,6 +12,7 @@
       {
         "id": 2,
         "name": "Tabletop Kingdom Haarlem",
+        "info" : "Winkel met veel aanbod voor tafelspel en kaartspel.",
         "coordinates": {
           "latitude": 52.378960,
           "longitude": 4.636390
@@ -19,6 +21,7 @@
       {
         "id": 3,
         "name": "De Toyboys",
+        "info" : "De Haarlemse winkel voor Marvel, Dc Comics, Star Wars, Turtles, Transformers, Games, Pokemon, Gi Joe, Comics, Collectibles, Actiefiguren en Merchandise!",
         "coordinates": {
           "latitude": 52.378570,
           "longitude": 4.631770
@@ -27,6 +30,7 @@
       {
         "id": 4,
         "name": "Spellenhuis Haarlem",
+        "info" : "In The Boardroom kan je honderden spellen spelen en ondertussen genieten van smakelijke hapjes en lekkere drankjes.",
         "coordinates": {
           "latitude": 52.386510,
           "longitude": 4.636380
@@ -35,6 +39,7 @@
       {
         "id": 5,
         "name": "Speelgoedwinkel Krokodil",
+        "info" : "De betere speelgoedwinkel in Haarlem! Origineel en houten speelgoed van mooi materiaal en ontwerp!",
         "coordinates": {
           "latitude": 52.37915700774712,
           "longitude": 4.633893140861033
@@ -43,6 +48,7 @@
       {
         "id": 6,
         "name": "De Popshop",
+        "info" : "De Popshop is een alternatieve kledingwinkel die sinds 1992 in centrum Haarlem zit in de stijlen Gothic, Metal, Punk, Emo, Game, Rock 'n Roll en Tattoo wear.",
         "coordinates": {
           "latitude": 52.37846403080551,
           "longitude": 4.631349793094277

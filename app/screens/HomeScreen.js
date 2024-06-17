@@ -10,9 +10,9 @@ export default function HomeScreen({}) {
   return (
     <View style={styles.container}>
       <Text>Dit is de home met een map!</Text>
-      <Button title='Go to map' onPress={() => navigation.navigate("Map")} />
-      <Button title='Go to Settings' onPress={() => navigation.navigate("Setting")} />
-      <StatusBar style="auto" />
+      <Button title='Map' onPress={() => navigation.navigate('Map',{})} />
+      <Button title='Overzicht spot' onPress={() => navigation.navigate('Map',{})} />
+      <Button title='Instelling' onPress={() => navigation.navigate('Setting')} />
     </View>
   );
 }
