@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StyleSheet, Text, View } from 'react-native';
 import HomeScreen from './components/map/HomeScreen';
 import CurrentLocation from './components/map/CurrentLocation';
+import SettingScreen from './components/setting/ThemeContext';
 
 // function HomeScreen(){
 //   return (
@@ -19,9 +20,10 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        {/* <Stack.Screen name="Map" component={HomeScreen} /> */}
+      <Stack.Navigator initialRouteName='Home'>
+        <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Map" component={CurrentLocation} />
+        <Stack.Screen name="Setting" component={SettingScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

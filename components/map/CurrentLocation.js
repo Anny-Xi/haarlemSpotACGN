@@ -1,17 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Platform, Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
 import * as Location from 'expo-location';
 
-// import { loadLocationMarkerData } from '../list/ListMarkers';
+import { LoadLocationMarkerData } from '../list/ListMarkers';
 
-// async function loadMarkers() {
-
-//   let data = await loadLocationMarkerData(); // await makes sure that the function will finish
-//   console.log("this is the data");
-//   console.log(data);
-// }
 
 export default function CurrentLocation() {
 
@@ -19,9 +13,11 @@ export default function CurrentLocation() {
   const [errorMsg, setErrorMsg] = useState(null);// error message
   const [mLat, setMLat] = useState(0); //latitude position
   const [mLong, setMLong] = useState(0); //longitude position
+  const [markerList, setList] = useState([]);
+  const mapRef = useRef(null);
 
   //set location of the user
-  async function liveLocation(){
+  async function liveLocation() {
     let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Low });
     // importeren van de andere pakket
     setLocation(location);
@@ -33,13 +29,15 @@ export default function CurrentLocation() {
   useEffect(() => {
     (async () => {
       // loadMarkers();
+      const loadedMarker = await LoadLocationMarkerData();
+      setList(loadedMarker.markers);
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         setErrorMsg('Permission to access location was denied');
         return;
       }
       //run get current location function
-        liveLocation();
+      liveLocation();
     })();
   }, []);
 
@@ -51,14 +49,39 @@ export default function CurrentLocation() {
     console.log(message);
   }
 
-  const getLocation = () => {
-    liveLocation()
+  //change view to user live location
+  const getLiveLocation = () => {
+    if (mapRef.current) {
+      mapRef.current.animateToRegion({
+        latitude: 52.381,
+        longitude: 4.63719,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.011,
+      }, 500); 
+    }
+  };
+
+  //change view to hotspots
+  const getHotspotLocation = () => {
+    const newLatitude = 52.381;
+    const newLongitude = 4.63719;//
+    const newLatitudeDelta= 0.000;
+    const newLongitudeDelta= 0.015;
+    if (mapRef.current) {
+      mapRef.current.animateToRegion({
+        latitude: newLatitude,
+        longitude: newLongitude,
+        latitudeDelta: newLatitudeDelta,
+        longitudeDelta: newLongitudeDelta,
+      }, 500); // animate to new region over 1 second
+    }
   };
 
   return (
     <View style={styles.container}>
       {/* <Text style={styles.paragraph}>{message}</Text> */}
       <MapView
+        ref={mapRef}
         style={styles.map}
         region={{
           latitude: mLat,
@@ -70,11 +93,25 @@ export default function CurrentLocation() {
         {/*marker for current location*/}
         <Marker coordinate={{ latitude: mLat, longitude: mLong }} />
 
+        {/*marker for hotspots*/}
+        {markerList.map((marker, index) => (
+          <Marker
+            key={index}
+            coordinate={marker.coordinates}
+            title={marker.name}
+          />
+        ))}
+
       </MapView>
       <TouchableOpacity
         style={styles.buttonLocation}
-        onPress={getLocation}>
+        onPress={getLiveLocation}>
         <Text>Get Current Location</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[styles.buttonLocation, { bottom: 80 }]}
+        onPress={getHotspotLocation}>
+        <Text>Get to Hotspot location</Text>
       </TouchableOpacity>
     </View>
   );
@@ -108,5 +145,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     backgroundColor: 'lightblue',
     bottom: 20, // Adjusted positioning
+    alignItems: 'center',
+    justifyContent: 'center',
+    
   }
 });
