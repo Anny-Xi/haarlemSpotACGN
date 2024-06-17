@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Platform, Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
 import * as Location from 'expo-location';
@@ -50,14 +50,15 @@ export default function CurrentLocation() {
   }
 
   //change view to user live location
-  const getLiveLocation = () => {
+  const getLiveLocation = async() => {
+    await liveLocation();
     if (mapRef.current) {
       mapRef.current.animateToRegion({
-        latitude: 52.381,
-        longitude: 4.63719,
+        latitude: mLat,
+        longitude: mLong,
         latitudeDelta: 0.01,
         longitudeDelta: 0.011,
-      }, 500); 
+      }, 500); // animate to new region over 1 second
     }
   };
 
