@@ -18,8 +18,7 @@ async function LoadLocationMarkerData() {
 async function ViewListMarker() {
     const markerList = await LoadLocationMarkerData()
     return (
-        <>
-            
+        <>            
                 {/* Link for mulipe markers:  https://stackoverflow.com/questions/40541095/render-multiple-marker-in-react-native-maps */}
 
                 {markerList.markers.map((marker, index) => (

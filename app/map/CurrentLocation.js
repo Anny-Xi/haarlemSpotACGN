@@ -4,8 +4,7 @@ import MapView, { Marker } from 'react-native-maps';
 
 import * as Location from 'expo-location';
 
-import { LoadLocationMarkerData } from '../list/ListMarkers';
-
+import { LoadLocationMarkerData } from '../list/ListHotspots'; 
 
 export default function CurrentLocation() {
 
@@ -92,7 +91,7 @@ export default function CurrentLocation() {
         }}
       >
         {/*marker for current location*/}
-        <Marker coordinate={{ latitude: mLat, longitude: mLong }} />
+        <Marker coordinate={{ latitude: mLat, longitude: mLong }} pinColor="blue"/>
 
         {/*marker for hotspots*/}
         {markerList.map((marker, index) => (
@@ -100,6 +99,7 @@ export default function CurrentLocation() {
             key={index}
             coordinate={marker.coordinates}
             title={marker.name}
+            // onPress={() => onPressMarker(marker)}
           />
         ))}
 

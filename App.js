@@ -5,16 +5,6 @@ import HomeScreen from './components/map/HomeScreen';
 import CurrentLocation from './components/map/CurrentLocation';
 import SettingScreen from './components/setting/ThemeContext';
 
-// function HomeScreen(){
-//   return (
-//     <View style={styles.container}>
-//       <Text>Open up App.js to start working on your app!</Text>
-//       <StatusBar style="auto" />
-//     </View>
-//   );
-// }
-
-
 const Stack = createNativeStackNavigator();
 
 export default function App() {
