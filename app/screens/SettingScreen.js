@@ -1,19 +1,24 @@
 import React, { useContext } from 'react';
-import { Text, StyleSheet, View, Button } from 'react-native';
+import { Text, StyleSheet, View, Button, Pressable } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { ThemeContext } from '../setting/ThemeContext';
 
-export default function Settings() {
+export default function SettingScreen() {
     const { isDarkMode, toggleTheme } = useContext(ThemeContext);
 
     const themeTextStyle = isDarkMode ? styles.darkThemeText : styles.lightThemeText;
     const themeContainerStyle = isDarkMode ? styles.darkContainer : styles.lightContainer;
+    const themeButton = isDarkMode ? styles.darkThemeButton : styles.lightThemeButton;
 
     return (
         // button to toggle dark and light mode:
         <View style={[styles.container, themeContainerStyle]}>
-            <Text style={[styles.text, themeTextStyle]}>Color scheme: {isDarkMode ? 'dark' : 'light'}</Text>
-            <Button title="Toggle Theme" onPress={toggleTheme} />
+            <Text style={[styles.text, themeTextStyle]}>Mode: {isDarkMode ? 'dark' : 'light'}</Text>
+            <Pressable onPress={toggleTheme} 
+            style={[styles.navButton, themeButton ]}
+            >
+                <Text style={[styles.text, themeTextStyle]}>Mode veranderen</Text>
+            </Pressable>
             <StatusBar style={isDarkMode ? 'light' : 'dark'} />
         </View>
     );
@@ -32,12 +37,27 @@ const styles = StyleSheet.create({
         backgroundColor: '#d0d0c0',
     },
     darkContainer: {
-        backgroundColor: '#242c40',
+        backgroundColor: '#4C1515',
     },
     lightThemeText: {
         color: '#242c40',
     },
     darkThemeText: {
         color: '#d0d0c0',
+    },
+    navButton: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: 10,
+        paddingVertical: 12,
+        paddingHorizontal: 32,
+        borderRadius: 4,
+        elevation: 3,
+    },
+    lightThemeButton: {
+        backgroundColor: '#d1d1f5'
+    },
+    darkThemeButton: {
+        backgroundColor: '#6F6F27'
     },
 });

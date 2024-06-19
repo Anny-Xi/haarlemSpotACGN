@@ -6,7 +6,7 @@ import * as Location from 'expo-location';
 
 import { LoadLocationMarkerData } from '../list/ListHotspots'; 
 
-export default function CurrentLocation() {
+export default function MapScreen() {
 
   const [location, setLocation] = useState(null);//location data
   const [errorMsg, setErrorMsg] = useState(null);// error message
