@@ -4,40 +4,54 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     navButton: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      margin: 10,
-      paddingVertical: 12,
-      paddingHorizontal: 32,
-      borderRadius: 4,
-      elevation: 3,
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: 10,
+        paddingVertical: 12,
+        paddingHorizontal: 32,
+        borderRadius: 4,
+        elevation: 3,
     },
     lightThemeButton: {
-      backgroundColor: '#d1d1f5'
+        backgroundColor: '#d1d1f5'
     },
     darkThemeButton: {
-      backgroundColor: '#6F6F27'
+        backgroundColor: '#6F6F27'
     },
     container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     text: {
-      fontSize: 20,
+        fontSize: 20,
     },
     lightContainer: {
-      backgroundColor: '#d0d0c0',
+        backgroundColor: '#d0d0c0',
     },
     darkContainer: {
-      backgroundColor: '#4C1515',
+        backgroundColor: '#4C1515',
     },
     lightThemeText: {
-      color: '#24402E',
+        color: '#24402E',
     },
     darkThemeText: {
-      color: '#F5F5D1',
+        color: '#F5F5D1',
     },
-  });
+    map: {
+        width: '100%',
+        height: '100%',
+    },
+    buttonLocation: {
+        width: '90%',
+        height: 50,
+        alignSelf: 'center',
+        position: 'absolute',
+        bottom: 20, // Adjusted positioning
+        alignItems: 'center',
+        justifyContent: 'center',
+
+    }
+});
 
 export { styles }

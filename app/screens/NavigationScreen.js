@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { useContext } from 'react';
-// import { useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { Text, View, Pressable } from 'react-native';
 
 import { ThemeContext } from '../setting/ThemeContext';
 //ThemeProvider
@@ -26,22 +25,22 @@ function NavigationScreen({ navigation }) {
   const themeButtonStyle = isDarkMode ? styles.darkThemeButton : styles.lightThemeButton;
 
   return (
-    <View style={[styles.container, isDarkMode && styles.darkContainer]}>
+    <View style={[styles.container, themeContainerStyle]}>
       <Text style={[styles.text, themeTextStyle]}>Menu</Text>
       <Pressable onPress={() => navigation.navigate('Map')}
         style={[styles.navButton, themeButtonStyle ]}
       >
-        <Text style={[styles.text, isDarkMode && styles.darkThemeText]}>Map</Text>
+        <Text style={[styles.text, themeTextStyle]}>Map</Text>
       </Pressable>
       <Pressable onPress={() => navigation.navigate('Map')}
         style={[styles.navButton, themeButtonStyle ]}
       >
-        <Text style={[styles.text, isDarkMode && styles.darkThemeText]}>Overicht</Text>
+        <Text style={[styles.text, themeTextStyle]}>Overicht</Text>
       </Pressable>
       <Pressable onPress={() => navigation.navigate('Setting')}
         style={[styles.navButton, themeButtonStyle ]}
       >
-        <Text style={[styles.text, isDarkMode && styles.darkThemeText]}>Instelling</Text>
+        <Text style={[styles.text, themeTextStyle]}>Instelling</Text>
       </Pressable>
     </View>
   );

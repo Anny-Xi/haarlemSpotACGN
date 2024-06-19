@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
-import { Text, StyleSheet, View, Button, Pressable } from 'react-native';
+import { Text, View, Pressable } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { ThemeContext } from '../setting/ThemeContext';
+import { styles } from '../style/Styling';
 
 export default function SettingScreen() {
     const { isDarkMode, toggleTheme } = useContext(ThemeContext);
@@ -23,41 +24,3 @@ export default function SettingScreen() {
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    text: {
-        fontSize: 20,
-    },
-    lightContainer: {
-        backgroundColor: '#d0d0c0',
-    },
-    darkContainer: {
-        backgroundColor: '#4C1515',
-    },
-    lightThemeText: {
-        color: '#242c40',
-    },
-    darkThemeText: {
-        color: '#d0d0c0',
-    },
-    navButton: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        margin: 10,
-        paddingVertical: 12,
-        paddingHorizontal: 32,
-        borderRadius: 4,
-        elevation: 3,
-    },
-    lightThemeButton: {
-        backgroundColor: '#d1d1f5'
-    },
-    darkThemeButton: {
-        backgroundColor: '#6F6F27'
-    },
-});

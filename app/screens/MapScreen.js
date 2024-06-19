@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { Text, View, Pressable } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
 import * as Location from 'expo-location';
 
-import { LoadLocationMarkerData } from '../list/ListHotspots'; 
+import { ThemeContext } from '../setting/ThemeContext';
+import { LoadLocationMarkerData } from '../list/ListHotspots';
+import { styles } from '../style/Styling';
 
 export default function MapScreen() {
 
@@ -49,7 +51,7 @@ export default function MapScreen() {
   }
 
   //change view to user live location
-  const getLiveLocation = async() => {
+  const getLiveLocation = async () => {
     await liveLocation();
     if (mapRef.current) {
       mapRef.current.animateToRegion({
@@ -65,8 +67,8 @@ export default function MapScreen() {
   const getHotspotLocation = () => {
     const newLatitude = 52.381;
     const newLongitude = 4.63719;//
-    const newLatitudeDelta= 0.000;
-    const newLongitudeDelta= 0.015;
+    const newLatitudeDelta = 0.000;
+    const newLongitudeDelta = 0.015;
     if (mapRef.current) {
       mapRef.current.animateToRegion({
         latitude: newLatitude,
@@ -76,6 +78,10 @@ export default function MapScreen() {
       }, 500); // animate to new region over 1 second
     }
   };
+
+  const { isDarkMode } = useContext(ThemeContext);
+  const themeButtonStyle = isDarkMode ? styles.darkThemeButton : styles.lightThemeButton;
+  const themeTextStyle = isDarkMode ? styles.darkThemeText : styles.lightThemeText;
 
   return (
     <View style={styles.container}>
@@ -91,7 +97,7 @@ export default function MapScreen() {
         }}
       >
         {/*marker for current location*/}
-        <Marker coordinate={{ latitude: mLat, longitude: mLong }} pinColor="blue"/>
+        <Marker coordinate={{ latitude: mLat, longitude: mLong }} pinColor="blue" />
 
         {/*marker for hotspots*/}
         {markerList.map((marker, index) => (
@@ -99,55 +105,21 @@ export default function MapScreen() {
             key={index}
             coordinate={marker.coordinates}
             title={marker.name}
-            // onPress={() => onPressMarker(marker)}
+          // onPress={() => onPressMarker(marker)}
           />
         ))}
 
       </MapView>
-      <TouchableOpacity
-        style={styles.buttonLocation}
+      <Pressable
+        style={[styles.buttonLocation, themeButtonStyle]}
         onPress={getLiveLocation}>
-        <Text>Get Current Location</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={[styles.buttonLocation, { bottom: 80 }]}
+        <Text style={[styles.text, themeTextStyle]}>Get Current Location</Text>
+      </Pressable>
+      <Pressable
+        style={[styles.buttonLocation, { bottom: 80 }, themeButtonStyle]}
         onPress={getHotspotLocation}>
-        <Text>Get to Hotspot location</Text>
-      </TouchableOpacity>
+        <Text style={[styles.text, themeTextStyle]}>Get to Hotspot location</Text>
+      </Pressable>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  paragraph: {
-    fontSize: 18,
-    textAlign: 'center',
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  map: {
-    width: '100%',
-    height: '100%',
-  },
-  buttonLocation: {
-    width: '90%',
-    height: 50,
-    alignSelf: 'center',
-    position: 'absolute',
-    backgroundColor: 'lightblue',
-    bottom: 20, // Adjusted positioning
-    alignItems: 'center',
-    justifyContent: 'center',
-    
-  }
-});
