@@ -1,4 +1,5 @@
-import { Marker } from 'react-native-maps';
+import React from 'react';
+
 const url = "https://anny-xi.github.io/haarlemSpotACGN/locations.json";
 
 async function LoadLocationMarkerData() {
@@ -18,17 +19,9 @@ async function LoadLocationMarkerData() {
 async function ViewListMarker() {
     const markerList = await LoadLocationMarkerData()
     return (
-        <>            
-                {/* Link for mulipe markers:  https://stackoverflow.com/questions/40541095/render-multiple-marker-in-react-native-maps */}
-
-                {markerList.markers.map((marker, index) => (
-                    <Marker
-                        key={index}
-                        coordinate={marker.coordinates}
-                        title={marker.name}
-                    />
-                ))}
-        </>
+        <View>            
+                
+        </View>
     );
 }
 

@@ -1,18 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
 import { useNavigation } from '@react-navigation/native';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { useContext } from 'react';
+// import { ThemeContext } from '../setting/ThemeContext'; // Ensure this path is correct
 
-
-export default function HomeScreen({}) {
+export default function HomeScreen() {
+  
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
-      <Text>Dit is de home met een map!</Text>
-      <Button title='Map' onPress={() => navigation.navigate('Map',{})} />
-      <Button title='Overzicht spot' onPress={() => navigation.navigate('Map',{})} />
-      <Button title='Instelling' onPress={() => navigation.navigate('Setting')} />
+    <View >
+      <Text>
+        Dit is de home met een map!
+      </Text>
+      <TouchableOpacity onPress={() => navigation.navigate('Map')}>
+        <Text>Map</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('Map')}>
+        <Text>Overicht</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('Setting')}>
+        <Text>Instelling</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -20,12 +28,19 @@ export default function HomeScreen({}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
   },
-  map: {
-    width: '100%',
-    height: '100%',
-  }
+  lightContainer: {
+    backgroundColor: '#d0d0c0',
+  },
+  darkContainer: {
+    backgroundColor: '#242c40',
+  },
+  lightThemeText: {
+    color: '#242c40',
+  },
+  darkThemeText: {
+    color: '#d0d0c0',
+  },
 });

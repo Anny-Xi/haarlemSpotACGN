@@ -1,29 +1,27 @@
+import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StyleSheet, Text, View } from 'react-native';
+// import { useColorScheme } from 'react-native';
+import { ThemeProvider } from '@react-navigation/native';
+
 import HomeScreen from './app/screens/HomeScreen';
 import CurrentLocation from './app/screens/MapScreen';
-import SettingScreen from './app/setting/ThemeContext';
+import SettingScreen from './app/screens/SettingScreen';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  // const scheme = useColorScheme();
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName='Home'>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Map" component={CurrentLocation} />
-        <Stack.Screen name="Setting" component={SettingScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ThemeProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName='Home'>
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Map" component={CurrentLocation} />
+          {/* <Stack.Screen name="Overview" component={CurrentLocation} /> */}
+          <Stack.Screen name="Setting" component={SettingScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
