@@ -14,13 +14,13 @@ const styles = StyleSheet.create({
     },
     lightThemeButton: {
         backgroundColor: '#f1c0c0',
-        borderColor:'#df6d6d',
-        borderWidth:1
+        borderColor: '#df6d6d',
+        borderWidth: 1
     },
     darkThemeButton: {
         backgroundColor: '#6F6F27',
-        borderColor:'#386d26',
-        borderWidth:1
+        borderColor: '#386d26',
+        borderWidth: 1
     },
     container: {
         flex: 1,
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         backgroundColor: 'rgba(0, 122, 255, 0.1)',
         borderWidth: 1,
-        borderColor:'rgba(0, 112, 255, 0.3)',
+        borderColor: 'rgba(0, 112, 255, 0.3)',
         alignItems: 'center',
         justifyContent: 'center'
 
@@ -70,25 +70,44 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         borderColor: 'white',
     },
-    buttonsContainer:{
-        flex:1,
-        flexDirection:'column',
-        flexWrap: 'wrap',
+    buttonsContainer: {
+        flex: 1,
+        flexDirection: 'column',
+        // flexWrap: 'wrap',
     },
     buttonLocation: {
         width: '50%',
         height: 50,
         alignSelf: 'center',
         bottom: 55,
-        padding:10,
+        padding: 10,
         alignItems: 'center',
         justifyContent: 'center',
-        marginLeft:10,
+        marginLeft: 10,
         borderRadius: 25 / 2,
 
     },
-    buttonText:{
-        fontSize:15
+    buttonText: {
+        fontSize: 15
+    },
+    row: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginVertical: 10,
+    },
+    overViewItem: {
+        width: '80%',
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        marginVertical: 5,
+    },
+    overViewText: {
+        fontSize: 15,
+        textAlign: 'center'
+    },
+    goLocationButton: {
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 });
 

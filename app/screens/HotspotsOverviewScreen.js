@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { Text, View, Pressable } from 'react-native';
+import { Text, View, Pressable, Button } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import { AntDesign } from '@expo/vector-icons';
 
 import { ThemeContext } from '../setting/ThemeContext';
 import { LoadLocationMarkerData } from '../list/ListHotspots';
@@ -16,6 +17,7 @@ export default function Overview() {
   const { isDarkMode } = useContext(ThemeContext);
   const themeButtonStyle = isDarkMode ? styles.darkThemeButton : styles.lightThemeButton;
   const themeTextStyle = isDarkMode ? styles.darkThemeText : styles.lightThemeText;
+  const iconStyle = isDarkMode ? 'white' : 'black';
 
 
   useEffect(() => {
@@ -39,8 +41,8 @@ export default function Overview() {
     loadSavedLocations();
   }, []);
 
-  const toggleFavorite = async (name) => {
-    const newSaveLocation = { ...saveLocation, [name]: !saveLocation[name] };
+  const toggleFavorite = async (locationName) => {
+    const newSaveLocation = { ...saveLocation, [locationName]: !saveLocation[locationName] };
     setLocation(newSaveLocation);
     try {
       await AsyncStorage.setItem('saveLocation', JSON.stringify(newSaveLocation));
@@ -52,24 +54,37 @@ export default function Overview() {
   return (
     <View style={[styles.container, isDarkMode && styles.darkContainer]}>
       {markerList.map((marker, index) => (
-        <View key={index} style={styles.item}>
+        <View
+          key={index}
+          style={[styles.overViewItem, themeButtonStyle]}
+        >
           <Text style={[
-            styles.text,
-            isDarkMode && styles.darkThemeText,
-            saveLocation[id] && styles.favoriteText
+            styles.overViewText, themeTextStyle, {fontSize:18}
           ]}>
-            Naam: {marker.name}
+            {marker.locationName}
           </Text>
-          <Button
-            title={saveLocation[name] ? 'Unfavorite' : 'Favorite'}
-            onPress={() => toggleFavorite(name)}
-            color={saveLocation[name] ? 'green' : 'blue'}
-          />
-          <Button
-            title="View location"
-            onPress={() => navigation.navigate('Map', { id })}
-            color="orange"
-          />
+          <View style={[styles.row]}>
+            <Pressable
+              onPress={() => toggleFavorite(marker.locationName)}
+              style={[styles.goLocationButton, { flex: 1 }]}
+            >
+              {saveLocation[marker.locationName] ? <AntDesign name="heart" size={24} color={iconStyle} /> : <AntDesign name="hearto" size={20} color={iconStyle} />}
+
+            </Pressable>
+            <Pressable
+              // onPress={() => navigation.navigate('Map', { locationName })}
+              style={[styles.row, styles.goLocationButton, { flex: 2 }]}
+            >
+              <Text
+                style={[
+                  styles.overViewText, themeTextStyle, {marginRight:5}
+                ]}
+              >
+                Locatie bekijken
+              </Text>
+              <AntDesign name="doubleright" size={20} color={iconStyle}/>
+            </Pressable>
+          </View>
         </View>
       ))}
     </View>
