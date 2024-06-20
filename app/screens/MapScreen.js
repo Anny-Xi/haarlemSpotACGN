@@ -107,7 +107,7 @@ export default function MapScreen({route}) {
           <Marker
             key={index}
             coordinate={marker.coordinates}
-            title={marker.name-location}
+            title={marker.locationName}
           // onPress={() => onPressMarker(marker)}
           />
         ))}
