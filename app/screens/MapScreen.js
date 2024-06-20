@@ -59,7 +59,7 @@ export default function MapScreen() {
         longitude: mLong,
         latitudeDelta: 0.01,
         longitudeDelta: 0.011,
-      }, 500); // animate to new region over 1 second
+      }, 500); // animate to new region over 0.5 second
     }
   };
 
@@ -75,7 +75,7 @@ export default function MapScreen() {
         longitude: newLongitude,
         latitudeDelta: newLatitudeDelta,
         longitudeDelta: newLongitudeDelta,
-      }, 500); // animate to new region over 1 second
+      }, 500); // animate to new region over 0.5 second
     }
   };
 
@@ -97,7 +97,11 @@ export default function MapScreen() {
         }}
       >
         {/*marker for current location*/}
-        <Marker coordinate={{ latitude: mLat, longitude: mLong }} pinColor="blue" />
+        <Marker coordinate={{ latitude: mLat, longitude: mLong }} >
+          <View style={styles.radius}>
+            <View style={styles.currentLocation} />
+          </View>
+        </Marker>
 
         {/*marker for hotspots*/}
         {markerList.map((marker, index) => (
@@ -108,18 +112,19 @@ export default function MapScreen() {
           // onPress={() => onPressMarker(marker)}
           />
         ))}
-
       </MapView>
-      <Pressable
-        style={[styles.buttonLocation, themeButtonStyle]}
-        onPress={getLiveLocation}>
-        <Text style={[styles.text, themeTextStyle]}>Get Current Location</Text>
-      </Pressable>
-      <Pressable
-        style={[styles.buttonLocation, { bottom: 80 }, themeButtonStyle]}
-        onPress={getHotspotLocation}>
-        <Text style={[styles.text, themeTextStyle]}>Get to Hotspot location</Text>
-      </Pressable>
+      <View style={styles.buttonsContainer}>
+        <Pressable
+          style={[styles.buttonLocation, themeButtonStyle]}
+          onPress={getLiveLocation}>
+          <Text style={[styles.buttonText, themeTextStyle, ]}>Ga naar huidig locatie</Text>
+        </Pressable>
+        <Pressable
+          style={[styles.buttonLocation, themeButtonStyle]}
+          onPress={getHotspotLocation}>
+          <Text style={[styles.buttonText, themeTextStyle]}>Ga naar hotspot locatie</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }
