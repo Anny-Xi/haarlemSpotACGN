@@ -1,5 +1,3 @@
-import React from 'react';
-
 const url = "https://anny-xi.github.io/haarlemSpotACGN/locations.json";
 
 async function LoadLocationMarkerData() {
@@ -16,13 +14,4 @@ async function LoadLocationMarkerData() {
 }
 
 
-async function ViewListMarker() {
-    const markerList = await LoadLocationMarkerData()
-    return (
-        <View>            
-                
-        </View>
-    );
-}
-
-export { ViewListMarker, LoadLocationMarkerData }
+export { LoadLocationMarkerData }

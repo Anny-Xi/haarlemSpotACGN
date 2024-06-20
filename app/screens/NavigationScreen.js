@@ -9,6 +9,7 @@ import { DarkTheme, DefaultTheme, NavigationContainer } from "@react-navigation/
 
 import MapScreen from './MapScreen';
 import SettingScreen from './SettingScreen';
+import Overview from './HotspotsOverviewScreen';
 
 import { styles } from '../style/Styling';
 
@@ -32,7 +33,7 @@ function NavigationScreen({ navigation }) {
       >
         <Text style={[styles.text, themeTextStyle]}>Map</Text>
       </Pressable>
-      <Pressable onPress={() => navigation.navigate('Map')}
+      <Pressable onPress={() => navigation.navigate('Overview')}
         style={[styles.navButton, themeButtonStyle ]}
       >
         <Text style={[styles.text, themeTextStyle]}>Overicht</Text>
@@ -52,6 +53,7 @@ export default function NavigationStack() {
     <NavigationContainer theme={isDarkMode ? DarkTheme : DefaultTheme}>
       <Stack.Navigator initialRouteName="Menu">
         <Stack.Screen name="Menu" component={NavigationScreen} />
+        <Stack.Screen name="Overview" component={Overview} />
         <Stack.Screen name="Map" component={MapScreen} />
         <Stack.Screen name="Setting" component={SettingScreen} />
       </Stack.Navigator>

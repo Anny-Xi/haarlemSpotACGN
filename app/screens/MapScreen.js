@@ -8,7 +8,7 @@ import { ThemeContext } from '../setting/ThemeContext';
 import { LoadLocationMarkerData } from '../list/ListHotspots';
 import { styles } from '../style/Styling';
 
-export default function MapScreen() {
+export default function MapScreen({route}) {
 
   const [location, setLocation] = useState(null);//location data
   const [errorMsg, setErrorMsg] = useState(null);// error message
@@ -26,7 +26,7 @@ export default function MapScreen() {
     setMLong(location.coords.longitude);
   }
 
-  //ask for permission
+  //ask for permission and load hotspot marker
   useEffect(() => {
     (async () => {
       // loadMarkers();
@@ -85,7 +85,6 @@ export default function MapScreen() {
 
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.paragraph}>{message}</Text> */}
       <MapView
         ref={mapRef}
         style={styles.map}
@@ -108,7 +107,7 @@ export default function MapScreen() {
           <Marker
             key={index}
             coordinate={marker.coordinates}
-            title={marker.name}
+            title={marker.name-location}
           // onPress={() => onPressMarker(marker)}
           />
         ))}
