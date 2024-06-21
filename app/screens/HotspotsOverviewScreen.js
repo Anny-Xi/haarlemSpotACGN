@@ -16,7 +16,8 @@ export default function Overview() {
   const { isDarkMode } = useContext(ThemeContext);
   const themeButtonStyle = isDarkMode ? styles.darkThemeButton : styles.lightThemeButton;
   const themeTextStyle = isDarkMode ? styles.darkThemeText : styles.lightThemeText;
-  const iconStyle = isDarkMode ? 'white' : 'black';
+  const iconStyle = isDarkMode ? '#F5F5D1' : '#24402E';
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,7 +40,7 @@ export default function Overview() {
     loadSavedLocations();
   }, []);
 
-  const toggleLike = async (locationName) => {
+  const toggleSave = async (locationName) => {
     const newSaveLocation = { ...saveLocation, [locationName]: !saveLocation[locationName] };
     setLocation(newSaveLocation);
     try {
@@ -63,7 +64,7 @@ export default function Overview() {
           </Text>
           <View style={[styles.row]}>
             <CustomPressable
-              onPress={() => toggleLike(marker.locationName)}
+              onPress={() => toggleSave(marker.locationName)}
               iconName={saveLocation[marker.locationName] ? "heart" : "hearto"}
               iconSize={24}
               iconColor={iconStyle}

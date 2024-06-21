@@ -25,6 +25,11 @@ export default function MapScreen({ route }) {
   const mapRef = useRef(null);
   const navigation = useNavigation();
 
+  //Laat light of dark mode style voor componenten
+  const { isDarkMode } = useContext(ThemeContext);
+  const themeButtonStyle = isDarkMode ? styles.darkThemeButton : styles.lightThemeButton;
+  const themeTextStyle = isDarkMode ? styles.darkThemeText : styles.lightThemeText;
+
   async function liveLocation() {
     let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced });
     setLocation(location);
@@ -112,10 +117,6 @@ export default function MapScreen({ route }) {
       }, 500);
     }
   };
-
-  const { isDarkMode } = useContext(ThemeContext);
-  const themeButtonStyle = isDarkMode ? styles.darkThemeButton : styles.lightThemeButton;
-  const themeTextStyle = isDarkMode ? styles.darkThemeText : styles.lightThemeText;
 
   return (
     <View style={styles.container}>
