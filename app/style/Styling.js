@@ -71,21 +71,33 @@ const styles = StyleSheet.create({
         borderColor: 'white',
     },
     buttonsContainer: {
-        flex: 1,
-        flexDirection: 'column',
+        position: 'absolute', // Ensure the container is positioned relative to the parent view
+        bottom: -50, // Position it at the bottom
+        left: 10, // Position it to the left
+        // flex: 1,
+        // bottom:110,
+        // flexDirection: 'row',
         // flexWrap: 'wrap',
     },
     buttonLocation: {
-        width: '50%',
+        width: '100%',
         height: 50,
-        alignSelf: 'center',
+        alignSelf: 'left',
         bottom: 55,
         padding: 10,
         alignItems: 'center',
         justifyContent: 'center',
-        marginLeft: 10,
+        marginBottom: 5,
         borderRadius: 25 / 2,
 
+    },
+    showButtonsIcon: {
+        position: 'absolute',
+        bottom: 25, // Adjust based on your layout
+        left: 10,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        padding: 10,
+        borderRadius: 25 / 2,
     },
     buttonText: {
         fontSize: 15

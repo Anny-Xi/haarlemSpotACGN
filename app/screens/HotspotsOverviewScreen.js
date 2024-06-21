@@ -1,16 +1,15 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
-import { Text, View, Pressable, Button } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { Text, View, Pressable } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native'; 
 import { AntDesign } from '@expo/vector-icons';
 
 import { ThemeContext } from '../setting/ThemeContext';
 import { LoadLocationMarkerData } from '../list/ListHotspots';
 import { styles } from '../style/Styling';
 
-
 export default function Overview() {
-  const navigation = useNavigation();
+  const navigation = useNavigation(); 
   const [markerList, setList] = useState([]);
   const [saveLocation, setLocation] = useState({});
 
@@ -18,7 +17,6 @@ export default function Overview() {
   const themeButtonStyle = isDarkMode ? styles.darkThemeButton : styles.lightThemeButton;
   const themeTextStyle = isDarkMode ? styles.darkThemeText : styles.lightThemeText;
   const iconStyle = isDarkMode ? 'white' : 'black';
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,7 +57,7 @@ export default function Overview() {
           style={[styles.overViewItem, themeButtonStyle]}
         >
           <Text style={[
-            styles.overViewText, themeTextStyle, {fontSize:18}
+            styles.overViewText, themeTextStyle, { fontSize: 18 }
           ]}>
             {marker.locationName}
           </Text>
@@ -69,20 +67,19 @@ export default function Overview() {
               style={[styles.goLocationButton, { flex: 1 }]}
             >
               {saveLocation[marker.locationName] ? <AntDesign name="heart" size={24} color={iconStyle} /> : <AntDesign name="hearto" size={20} color={iconStyle} />}
-
             </Pressable>
             <Pressable
-              // onPress={() => navigation.navigate('Map', { locationName })}
+              onPress={() => navigation.navigate('Map', { marker })} // <--- Add this line
               style={[styles.row, styles.goLocationButton, { flex: 2 }]}
             >
               <Text
                 style={[
-                  styles.overViewText, themeTextStyle, {marginRight:5}
+                  styles.overViewText, themeTextStyle, { marginRight: 5 }
                 ]}
               >
                 Locatie bekijken
               </Text>
-              <AntDesign name="doubleright" size={20} color={iconStyle}/>
+              <AntDesign name="doubleright" size={20} color={iconStyle} />
             </Pressable>
           </View>
         </View>
