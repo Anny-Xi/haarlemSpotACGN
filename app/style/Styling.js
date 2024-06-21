@@ -28,7 +28,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     text: {
-        fontSize: 20,
+        fontSize: 18,
+    },
+    titleText:{
+        fontSize: 30,
+        fontWeight: 'bold',
+        marginBottom:5
     },
     lightContainer: {
         backgroundColor: '#d0d0c0',
@@ -71,13 +76,9 @@ const styles = StyleSheet.create({
         borderColor: 'white',
     },
     buttonsContainer: {
-        position: 'absolute', // Ensure the container is positioned relative to the parent view
-        bottom: -50, // Position it at the bottom
-        left: 10, // Position it to the left
-        // flex: 1,
-        // bottom:110,
-        // flexDirection: 'row',
-        // flexWrap: 'wrap',
+        position: 'absolute',
+        bottom: -50,
+        left: 10,
     },
     buttonLocation: {
         width: '100%',
@@ -93,9 +94,9 @@ const styles = StyleSheet.create({
     },
     showButtonsIcon: {
         position: 'absolute',
-        bottom: 25, // Adjust based on your layout
+        bottom: 25,
         left: 10,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        // backgroundColor: 'rgba(0, 0, 0, 0.5)',
         padding: 10,
         borderRadius: 25 / 2,
     },

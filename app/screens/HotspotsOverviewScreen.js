@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Text, View, Pressable } from 'react-native';
+import { Text, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native'; 
-import { AntDesign } from '@expo/vector-icons';
 
 import { ThemeContext } from '../setting/ThemeContext';
 import { LoadLocationMarkerData } from '../list/ListHotspots';
 import { styles } from '../style/Styling';
+import CustomPressable from '../components/CustomPressable';
 
 export default function Overview() {
   const navigation = useNavigation(); 
@@ -62,25 +62,22 @@ export default function Overview() {
             {marker.locationName}
           </Text>
           <View style={[styles.row]}>
-            <Pressable
+            <CustomPressable
               onPress={() => toggleLike(marker.locationName)}
-              style={[styles.goLocationButton, { flex: 1 }]}
-            >
-              {saveLocation[marker.locationName] ? <AntDesign name="heart" size={24} color={iconStyle} /> : <AntDesign name="hearto" size={20} color={iconStyle} />}
-            </Pressable>
-            <Pressable
-              onPress={() => navigation.navigate('Map', { marker })} // <--- Add this line
-              style={[styles.row, styles.goLocationButton, { flex: 2 }]}
-            >
-              <Text
-                style={[
-                  styles.overViewText, themeTextStyle, { marginRight: 5 }
-                ]}
-              >
-                Locatie bekijken
-              </Text>
-              <AntDesign name="doubleright" size={20} color={iconStyle} />
-            </Pressable>
+              iconName={saveLocation[marker.locationName] ? "heart" : "hearto"}
+              iconSize={24}
+              iconColor={iconStyle}
+              buttonStyle={[styles.goLocationButton, { flex: 1 }]}
+            />
+            <CustomPressable
+              onPress={() => navigation.navigate('Map', { marker })}
+              text="Locatie bekijken"
+              textStyle={[styles.overViewText, themeTextStyle, { marginRight: 5 }]}
+              iconName="doubleright"
+              iconSize={20}
+              iconColor={iconStyle}
+              buttonStyle={[styles.row, styles.goLocationButton, { flex: 2 }]}
+            />
           </View>
         </View>
       ))}
