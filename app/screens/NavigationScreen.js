@@ -10,6 +10,7 @@ import { DarkTheme, DefaultTheme, NavigationContainer } from "@react-navigation/
 import MapScreen from './MapScreen';
 import SettingScreen from './SettingScreen';
 import Overview from './HotspotsOverviewScreen';
+import Compass from '../components/Compass';
 
 import { styles } from '../style/Styling';
 
@@ -43,6 +44,12 @@ function NavigationScreen({ navigation }) {
       >
         <Text style={[styles.text, themeTextStyle]}>Instelling</Text>
       </Pressable>
+
+      <Pressable onPress={() => navigation.navigate('Compass')}
+        style={[styles.navButton, themeButtonStyle ]}
+      >
+        <Text style={[styles.text, themeTextStyle]}>Compass</Text>
+      </Pressable>
     </View>
   );
 }
@@ -56,6 +63,8 @@ export default function NavigationStack() {
         <Stack.Screen name="Overview" component={Overview} />
         <Stack.Screen name="Map" component={MapScreen} />
         <Stack.Screen name="Setting" component={SettingScreen} />
+
+        <Stack.Screen name="Compass" component={Compass} />
       </Stack.Navigator>
     </NavigationContainer>
   );

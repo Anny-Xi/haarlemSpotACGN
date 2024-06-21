@@ -39,7 +39,7 @@ export default function Overview() {
     loadSavedLocations();
   }, []);
 
-  const toggleFavorite = async (locationName) => {
+  const toggleLike = async (locationName) => {
     const newSaveLocation = { ...saveLocation, [locationName]: !saveLocation[locationName] };
     setLocation(newSaveLocation);
     try {
@@ -63,7 +63,7 @@ export default function Overview() {
           </Text>
           <View style={[styles.row]}>
             <Pressable
-              onPress={() => toggleFavorite(marker.locationName)}
+              onPress={() => toggleLike(marker.locationName)}
               style={[styles.goLocationButton, { flex: 1 }]}
             >
               {saveLocation[marker.locationName] ? <AntDesign name="heart" size={24} color={iconStyle} /> : <AntDesign name="hearto" size={20} color={iconStyle} />}
