@@ -1,11 +1,14 @@
 import React, { createContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// Create a context for theme management
 export const ThemeContext = createContext();
 
+// Theme provider component
 export const ThemeProvider = ({ children }) => {
     const [isDarkMode, setIsDarkMode] = useState(false);
 
+    // Load the theme from async storage when the component mounts
     useEffect(() => {
         const loadTheme = async () => {
             try {
@@ -21,6 +24,7 @@ export const ThemeProvider = ({ children }) => {
         loadTheme();
     }, []);
 
+    // Save the theme to async storage whenever it changes
     useEffect(() => {
         const saveTheme = async () => {
             try {
@@ -33,6 +37,7 @@ export const ThemeProvider = ({ children }) => {
         saveTheme();
     }, [isDarkMode]);
 
+    // Function to toggle between dark and light mode
     const toggleTheme = () => {
         setIsDarkMode(previousState => !previousState);
     };

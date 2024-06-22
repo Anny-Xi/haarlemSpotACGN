@@ -1,4 +1,4 @@
-const url = "https://anny-xi.github.io/haarlemSpotACGN/locations.json";
+const url = "https://anny-xi.github.io/haarlemSpotACGN/locations.json"; //json file
 
 async function LoadLocationMarkerData() {
 

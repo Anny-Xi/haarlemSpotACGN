@@ -13,6 +13,7 @@ function HomeScreen() {
   const navigation = useNavigation();
   const { isDarkMode } = useContext(ThemeContext);
 
+  // Apply styles based on the current theme
   const themeTextStyle = isDarkMode ? styles.darkThemeText : styles.lightThemeText;
   const themeContainerStyle = isDarkMode ? styles.darkContainer : styles.lightContainer;
   const themeButtonStyle = isDarkMode ? styles.darkThemeButton : styles.lightThemeButton;
@@ -23,12 +24,16 @@ function HomeScreen() {
       <Text style={[styles.titleText, themeTextStyle]}>Hotspot in Haarlem</Text>
       <Text style={[styles.titleText, themeTextStyle]}>"Otaku" editie</Text>
       <FontAwesome6 name="face-smile-wink" size={30} color={iconStyle} />
+
+      {/* Button to navigate to the Map screen */}
       <CustomPressable
         onPress={() => navigation.navigate('Map')}
         text="Ga naar Map"
         textStyle={[styles.text, themeTextStyle]}
         buttonStyle={[styles.navButton, themeButtonStyle]}
       />
+
+      {/* Button to navigate to the Setting screen */}
       <CustomPressable
         onPress={() => navigation.navigate('Setting')}
         text="Instelling"

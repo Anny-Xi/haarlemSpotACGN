@@ -13,8 +13,8 @@ import CustomPressable from '../components/CustomPressable';
 
 export default function MapScreen({ route }) {
   const { marker } = route.params || {};
-  const [location, setLocation] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
+  // const [location, setLocation] = useState(null);  // State to store user current location
+  // const [errorMsg, setErrorMsg] = useState(null);
   const [mLat, setMLat] = useState(0);
   const [mLong, setMLong] = useState(0);
   const [markerList, setList] = useState([]);
@@ -25,18 +25,20 @@ export default function MapScreen({ route }) {
   const mapRef = useRef(null);
   const navigation = useNavigation();
 
-  //Laat light of dark mode style voor componenten
+  // Get the current theme context (dark or light mode)
   const { isDarkMode } = useContext(ThemeContext);
   const themeButtonStyle = isDarkMode ? styles.darkThemeButton : styles.lightThemeButton;
   const themeTextStyle = isDarkMode ? styles.darkThemeText : styles.lightThemeText;
 
+  // Function to get the current location of the user
   async function liveLocation() {
     let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced });
-    setLocation(location);
+    // setLocation(location);
     setMLat(location.coords.latitude);
     setMLong(location.coords.longitude);
   }
 
+  // Load markers and request location permissions on component mount
   useEffect(() => {
     (async () => {
       const loadedMarker = await LoadLocationMarkerData();
@@ -50,6 +52,7 @@ export default function MapScreen({ route }) {
     })();
   }, []);
 
+  // Animate map to the marker's location if a marker is provided
   useEffect(() => {
     if (marker && mapRef.current) {
       mapRef.current.animateToRegion(
@@ -64,33 +67,36 @@ export default function MapScreen({ route }) {
     }
   }, [marker]);
 
+  // Set up magnetometer to get device heading
   useEffect(() => {
     Magnetometer.addListener((data) => {
       const { x, y, z } = data;
       const angle = Math.atan2(y, x) * (180 / Math.PI);
-      setHeading(angle >= 0 ? angle : 360 + angle - 40);
+      setHeading(angle >= 0 ? angle : 360 + angle - 40); // Adjust '-40' if the icon/image doesn't point in the right direction
     });
 
-    Magnetometer.setUpdateInterval(400);
+    Magnetometer.setUpdateInterval(500); // Update data every 0.5 seconds
 
     return () => {
-      Magnetometer.removeAllListeners();
+      Magnetometer.removeAllListeners(); // Clean up listener on component unmount
     };
   }, []);
 
+  // Update rotation degrees whenever heading changes
   useEffect(() => {
     if (heading !== null) {
       setRotationDegrees(heading);
     }
   }, [heading]);
 
-  let message = 'Waiting..';
-  if (errorMsg) {
-    message = errorMsg;
-  } else if (location) {
-    message = JSON.stringify(location);
-  }
+  // let message = 'Waiting..';
+  // if (errorMsg) {
+  //   message = errorMsg;
+  // } else if (location) {
+  //   message = JSON.stringify(location);
+  // }
 
+  // Function to animate map to current location
   const getLiveLocation = async () => {
     await liveLocation();
     if (mapRef.current) {
@@ -103,6 +109,7 @@ export default function MapScreen({ route }) {
     }
   };
 
+  // Function to animate map to a predefined hotspot location (Haarlem)
   const getHotspotLocation = () => {
     const newLatitude = 52.381;
     const newLongitude = 4.63719;
@@ -134,14 +141,29 @@ export default function MapScreen({ route }) {
           latitudeDelta: 0.01,
           longitudeDelta: 0.011,
         }}
-        onPress={() => setButtonsVisible(false)}
+        onPress={() => setButtonsVisible(false)} // Hide menu when pressing on the map
       >
+        {/* Marker for current location */}
         <Marker coordinate={{ latitude: mLat, longitude: mLong }} >
           <View style={styles.radius}>
             <View style={styles.currentLocation} />
           </View>
         </Marker>
 
+        {/* Marker for direction */}
+        {heading !== null && (
+          <Marker
+            coordinate={{ latitude: mLat, longitude: mLong }}
+            anchor={{ x: 0.5, y: 0.5 }}
+            flat={true}
+            rotation={rotationDegrees}
+            style={[{ zIndex: 10 }]}
+          >
+            <AntDesign name="arrowleft" size={24} color="black" />
+          </Marker>
+        )}
+
+        {/* Markers for hotspot locations */}
         {markerList.map((marker, index) => (
           <Marker
             key={index}
@@ -149,20 +171,9 @@ export default function MapScreen({ route }) {
             title={marker.locationName}
           />
         ))}
-
-        {heading !== null && (
-          <Marker
-            coordinate={{ latitude: mLat, longitude: mLong }}
-            anchor={{ x: 0.5, y: 0.5 }} // Center anchor
-            flat={true} // Marker does not tilt based on the map camera
-            rotation={rotationDegrees} // Rotate marker based on device heading
-            style={[{ zIndex: 10 }]}
-          >
-            <AntDesign name="arrowleft" size={24} color="black" />
-          </Marker>
-        )}
       </MapView>
 
+      {/* Show menu button */}
       {!buttonsVisible && (
         <CustomPressable
           onPress={() => setButtonsVisible(!buttonsVisible)}
@@ -173,6 +184,7 @@ export default function MapScreen({ route }) {
         />
       )}
 
+      {/* Button container on map view */}
       {buttonsVisible && (
         <View style={styles.buttonsContainer}>
           <CustomPressable
