@@ -13,10 +13,9 @@ import { AntDesign } from '@expo/vector-icons';
  * @param {string} iconColor - Color of the icon.
  * @param {object} buttonStyle - Style object for the button.
  */
-
 const CustomPressable = ({ onPress, text, textStyle, iconName, iconSize, iconColor, buttonStyle }) => (
   <Pressable onPress={onPress} style={buttonStyle}>
-    {text && <Text style={textStyle}>{text}</Text>}
+    {text && <Text style={textStyle}>{text}</Text>} 
     {iconName && <AntDesign name={iconName} size={iconSize} color={iconColor} />}
   </Pressable>
 );

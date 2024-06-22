@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import NavigationStack from './app/screens/NavigationScreen';
+import NavigationStack from './app/setting/Navigation';
 import { ThemeProvider } from './app/setting/ThemeContext';
 
 
